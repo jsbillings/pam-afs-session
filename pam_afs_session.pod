@@ -1,7 +1,7 @@
 =for stopwords
 AFS PAG PAGs auth Heimdal libkafs aklog KRB5CCNAME kaserver appdefaults
-API unlog kdestroy nopag notokens SIGSYS krb524 Kerberos username login
-sshd Kerberos-v5-derived SIGCHLD
+API unlog kdestroy nopag notokens no_afs_check SIGSYS krb524 Kerberos 
+username login sshd Kerberos-v5-derived SIGCHLD
 
 =head1 NAME
 
@@ -220,6 +220,15 @@ nopag and notokens are set, the module essentially does nothing.
 Setting notokens also implies retain_after_close, meaning that the AFS
 session PAM module will also not attempt to delete tokens when the user's
 session ends.
+
+=item no_afs_check
+
+If this option is set, the AFS session PAM module won't check for whether
+AFS is available.
+
+By default, this module will check whether AFS is available and give up if
+it is not.  On Linux, it uses libkafs to look for OpenAFS. For Linux
+kernel kAFS-based system (not libkafs), this option needs to be enabled.
 
 =item program=I<path>
 

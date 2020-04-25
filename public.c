@@ -46,7 +46,7 @@ pam_sm_open_session(pam_handle_t *pamh, int flags, int argc,
     ENTRY(args, flags);
 
     /* Do nothing unless AFS is available. */
-    if (!k_hasafs()) {
+    if (!args->config->no_afs_check && !k_hasafs()) {
         putil_err(args, "skipping, AFS apparently not available");
         pamret = PAM_IGNORE;
         goto done;
@@ -135,7 +135,7 @@ pam_sm_setcred(pam_handle_t *pamh, int flags, int argc,
      * with the [] syntax.  Since we do nothing in this case, and since the
      * stack is already frozen from the auth group, success makes sense.
      */
-    if (!k_hasafs()) {
+    if (!args->config->no_afs_check && !k_hasafs()) {
         putil_err(args, "skipping, AFS apparently not available");
         pamret = PAM_SUCCESS;
         goto done;

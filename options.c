@@ -45,6 +45,7 @@ static const struct option options[] = {
     { K(nopag),              true, BOOL    (false)      },
 #endif
     { K(notokens),           true, BOOL    (false)      },
+    { K(no_afs_check),       true, BOOL    (false)      },
     { K(program),            true, STRLIST (PATH_AKLOG) },
     { K(retain_after_close), true, BOOL    (false)      },
 };
@@ -80,6 +81,9 @@ pamafs_init(pam_handle_t *pamh, int flags, int argc, const char **argv)
         goto fail;
     if (args->config->debug)
         args->debug = true;
+    if (args->config->no_afs_check)
+        args->config->nopag = true;
+
 
     /* UIDs are unsigned on some systems. */
     if (args->config->minimum_uid < 0)

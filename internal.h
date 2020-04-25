@@ -43,6 +43,7 @@ struct pam_config {
     long minimum_uid;           /* Ignore users below this UID. */
     bool nopag;                 /* Don't create a new PAG. */
     bool notokens;              /* Only create a PAG, don't obtain tokens. */
+    bool no_afs_check;          /* Don't attempt to probe for AFS */
     struct vector *program;     /* Program to run for tokens. */
     bool retain_after_close;    /* Don't destroy the cache on session end. */
 };
