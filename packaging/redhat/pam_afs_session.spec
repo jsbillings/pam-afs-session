@@ -5,7 +5,7 @@ Release: 13%{?dist}
 License: MIT
 URL: https://www.eyrie.org/~eagle/software/pam-afs-session/
 Source: pam-afs-session-%{version}.tar.gz
-BuildRequires:  gcc
+BuildRequires: gcc, autoconf, automake, libtool
 BuildRequires: pam-devel
 BuildRequires: krb5-devel
 %description
@@ -22,6 +22,7 @@ Kerberos and runs a configurable external program to obtain tokens.
 find examples -mindepth 1 -maxdepth 1 -not -name "redhat" -exec rm -rf {} ';'
 
 %build
+bash ./autogen
 %configure --libdir=/%{_lib} --with-aklog=%{_bindir}/aklog
 make %{?_smp_mflags}
 
