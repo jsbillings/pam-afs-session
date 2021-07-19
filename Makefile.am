@@ -202,3 +202,6 @@ tests_portable_strndup_t_LDADD = tests/tap/libtap.a portable/libportable.la
 
 check-local: $(check_PROGRAMS)
 	cd tests && ./runtests -l $(abs_top_srcdir)/tests/TESTS
+
+srpm: dist-gzip
+	rpmbuild -bs --define "_sourcedir $(PWD)" --define "_srcrpmdir $(PWD)" packaging/redhat/pam_afs_session.spec
